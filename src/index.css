@@ -102,12 +102,23 @@
 
 /* Paw print floating animation */
 @keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.06; }
-  50% { transform: translateY(-20px) rotate(10deg); opacity: 0.12; }
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.35; }
+  50% { transform: translateY(-20px) rotate(10deg); opacity: 0.5; }
 }
 
 .paw-float {
   animation: float 6s ease-in-out infinite;
+}
+
+/* Gentle drift for scattered section paws */
+@keyframes drift {
+  0%, 100% { transform: translateY(0) rotate(var(--paw-rotate, 0deg)); }
+  50% { transform: translateY(-8px) rotate(calc(var(--paw-rotate, 0deg) + 5deg)); }
+}
+
+.paw-drift {
+  animation: drift 8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 /* Gradient text — warm neutrals */

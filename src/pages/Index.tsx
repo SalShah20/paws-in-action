@@ -92,10 +92,10 @@ const Index = () => {
       {/* Hero */}
       <section className="relative py-24 md:py-36 bg-hero-gradient overflow-hidden">
         {/* Floating paw decorations */}
-        <PawPrint className="absolute top-16 left-[10%] h-16 w-16 text-stone-300 paw-float" />
-        <PawPrint className="absolute top-32 right-[15%] h-12 w-12 text-amber-200 paw-float" style={{ animationDelay: "2s" }} />
-        <PawPrint className="absolute bottom-20 left-[20%] h-10 w-10 text-stone-200 paw-float" style={{ animationDelay: "4s" }} />
-        <PawPrint className="absolute bottom-32 right-[25%] h-14 w-14 text-orange-200 paw-float" style={{ animationDelay: "1s" }} />
+        <PawPrint className="absolute top-16 left-[10%] h-16 w-16 text-stone-500/50 paw-float" />
+        <PawPrint className="absolute top-32 right-[15%] h-12 w-12 text-amber-500/45 paw-float" style={{ animationDelay: "2s" }} />
+        <PawPrint className="absolute bottom-20 left-[20%] h-10 w-10 text-stone-500/40 paw-float" style={{ animationDelay: "4s" }} />
+        <PawPrint className="absolute bottom-32 right-[25%] h-14 w-14 text-amber-600/40 paw-float" style={{ animationDelay: "1s" }} />
 
         <div className="container mx-auto px-4 flex flex-col items-center text-center relative z-10">
           <div className="mb-8 relative">
@@ -156,8 +156,10 @@ const Index = () => {
       </section>
 
       {/* Statistics */}
-      <section className="py-20 bg-stone-800 text-white">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-stone-800 text-white relative overflow-hidden">
+        <PawPrint className="absolute top-8 left-[6%] h-20 w-20 text-white/[0.12] rotate-[-15deg] paw-drift" style={{ "--paw-rotate": "-15deg", animationDelay: "2s" } as React.CSSProperties} />
+        <PawPrint className="absolute bottom-12 right-[8%] h-16 w-16 text-white/[0.12] rotate-[30deg] paw-drift" style={{ "--paw-rotate": "30deg", animationDelay: "5s" } as React.CSSProperties} />
+        <div className="container mx-auto px-4 relative z-10">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-16">
             Why This Matters in California
           </h2>
@@ -190,8 +192,11 @@ const Index = () => {
       </section>
 
       {/* Programs */}
-      <section id="programs" className="py-20 bg-warm-gradient">
-        <div className="container mx-auto px-4">
+      <section id="programs" className="py-20 bg-warm-gradient relative overflow-hidden">
+        <PawPrint className="absolute top-10 right-[8%] h-20 w-20 text-stone-400/40 rotate-[-20deg] paw-drift" style={{ "--paw-rotate": "-20deg", animationDelay: "0s" } as React.CSSProperties} />
+        <PawPrint className="absolute bottom-12 left-[5%] h-14 w-14 text-amber-400/30 rotate-[15deg] paw-drift" style={{ "--paw-rotate": "15deg", animationDelay: "3s" } as React.CSSProperties} />
+        <PawPrint className="absolute top-1/2 right-[3%] h-10 w-10 text-stone-400/30 rotate-[35deg] paw-drift" style={{ "--paw-rotate": "35deg", animationDelay: "5s" } as React.CSSProperties} />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">
               What We Do
@@ -226,8 +231,10 @@ const Index = () => {
       </section>
 
       {/* Partners */}
-      <section id="partners" className="py-20 bg-background">
-        <div className="container mx-auto px-4 text-center">
+      <section id="partners" className="py-20 bg-background relative overflow-hidden">
+        <PawPrint className="absolute top-8 left-[6%] h-16 w-16 text-stone-400/30 rotate-[-10deg] paw-drift" style={{ "--paw-rotate": "-10deg", animationDelay: "1s" } as React.CSSProperties} />
+        <PawPrint className="absolute bottom-10 right-[7%] h-12 w-12 text-amber-400/25 rotate-[25deg] paw-drift" style={{ "--paw-rotate": "25deg", animationDelay: "4s" } as React.CSSProperties} />
+        <div className="container mx-auto px-4 text-center relative z-10">
           <span className="text-sm font-semibold text-primary uppercase tracking-wider">
             Working Together
           </span>
@@ -263,8 +270,12 @@ const Index = () => {
       </section>
 
       {/* About Us */}
-      <section id="about" className="py-20 bg-warm-gradient">
-        <div className="container mx-auto px-4">
+      <section id="about" className="py-20 bg-warm-gradient relative overflow-hidden">
+        <PawPrint className="absolute top-14 left-[4%] h-24 w-24 text-stone-400/30 rotate-[-30deg] paw-drift" style={{ "--paw-rotate": "-30deg", animationDelay: "2s" } as React.CSSProperties} />
+        <PawPrint className="absolute top-1/3 right-[5%] h-16 w-16 text-amber-400/25 rotate-[20deg] paw-drift" style={{ "--paw-rotate": "20deg", animationDelay: "6s" } as React.CSSProperties} />
+        <PawPrint className="absolute bottom-16 left-[12%] h-12 w-12 text-stone-400/30 rotate-[40deg] paw-drift" style={{ "--paw-rotate": "40deg", animationDelay: "4s" } as React.CSSProperties} />
+        <PawPrint className="absolute bottom-24 right-[10%] h-10 w-10 text-stone-400/25 rotate-[-15deg] paw-drift" style={{ "--paw-rotate": "-15deg", animationDelay: "7s" } as React.CSSProperties} />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">
               Our Story
@@ -372,8 +383,10 @@ const Index = () => {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-lg text-center">
+      <section id="contact" className="py-20 bg-background relative overflow-hidden">
+        <PawPrint className="absolute top-10 right-[10%] h-14 w-14 text-stone-400/30 rotate-[10deg] paw-drift" style={{ "--paw-rotate": "10deg", animationDelay: "1.5s" } as React.CSSProperties} />
+        <PawPrint className="absolute bottom-8 left-[8%] h-10 w-10 text-amber-400/25 rotate-[-25deg] paw-drift" style={{ "--paw-rotate": "-25deg", animationDelay: "5s" } as React.CSSProperties} />
+        <div className="container mx-auto px-4 max-w-lg text-center relative z-10">
           <span className="text-sm font-semibold text-primary uppercase tracking-wider">
             Reach Out
           </span>
@@ -438,6 +451,17 @@ const Index = () => {
           </div>
           <p className="text-sm text-stone-400">
             &copy; {new Date().getFullYear()} Paws in Action. All rights reserved.
+          </p>
+          <p className="text-xs text-stone-500">
+            Website made by{" "}
+            <a
+              href="https://salonishah.net"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-stone-300 hover:text-white transition-colors underline"
+            >
+              Saloni Shah
+            </a>
           </p>
         </div>
       </footer>
