@@ -398,7 +398,7 @@ const Index = () => {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" className="rounded-full px-8 gap-2 shadow-md" asChild>
-              <a href="mailto:pawsaction.in@gmail.com">
+              <a href="mailto:aarini@pawsinaction.org">
                 <Mail className="h-5 w-5" />
                 Email Us
               </a>
@@ -433,7 +433,7 @@ const Index = () => {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="mailto:pawsaction.in@gmail.com"
+              href="mailto:aarini@pawsinaction.org"
               className="text-stone-400 hover:text-white transition-colors"
               aria-label="Email"
             >
