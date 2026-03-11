@@ -1,7 +1,13 @@
-import { Mail, PawPrint, ArrowRight, Heart, Instagram, Users, Eye } from "lucide-react";
+import { useState } from "react";
+import { Mail, PawPrint, ArrowRight, Heart, Instagram, Users, Eye, CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import logo from "@/assets/logo.jpeg";
+
+const WEB3FORMS_KEY = "0321222c-dae1-407c-b7da-f70eb9bc2161";
 
 const programs = [
   {
@@ -46,6 +52,37 @@ const navLinks = [
 ];
 
 const Index = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `New message from ${formData.name}`,
+          from_name: formData.name,
+          ...formData,
+        }),
+      });
+      if (res.ok) {
+        setStatus("sent");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -71,7 +108,7 @@ const Index = () => {
           </div>
           <div className="flex items-center gap-3">
             <a
-              href="https://www.instagram.com/pawsinaction_2025"
+              href="https://www.instagram.com/_pawsinaction_"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -143,7 +180,7 @@ const Index = () => {
               asChild
             >
               <a
-                href="https://www.instagram.com/pawsinaction_2025"
+                href="https://www.instagram.com/_pawsinaction_"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -386,38 +423,127 @@ const Index = () => {
       <section id="contact" className="py-20 bg-background relative overflow-hidden">
         <PawPrint className="absolute top-10 right-[10%] h-14 w-14 text-stone-400/30 rotate-[10deg] paw-drift" style={{ "--paw-rotate": "10deg", animationDelay: "1.5s" } as React.CSSProperties} />
         <PawPrint className="absolute bottom-8 left-[8%] h-10 w-10 text-amber-400/25 rotate-[-25deg] paw-drift" style={{ "--paw-rotate": "-25deg", animationDelay: "5s" } as React.CSSProperties} />
-        <div className="container mx-auto px-4 max-w-lg text-center relative z-10">
-          <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-            Reach Out
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-            Get in Touch
-          </h2>
-          <p className="text-muted-foreground mb-10">
-            Want to partner, volunteer, or learn more? We'd love to hear from you.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="rounded-full px-8 gap-2 shadow-md" asChild>
-              <a href="mailto:aarini@pawsinaction.org">
-                <Mail className="h-5 w-5" />
-                Email Us
-              </a>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="rounded-full px-8 gap-2 border-2"
-              asChild
-            >
-              <a
-                href="https://www.instagram.com/pawsinaction_2025"
-                target="_blank"
-                rel="noopener noreferrer"
+        <div className="container mx-auto px-4 max-w-xl relative z-10">
+          <div className="text-center mb-10">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+              Reach Out
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
+              Get in Touch
+            </h2>
+            <p className="text-muted-foreground">
+              Want to partner, volunteer, or learn more? We'd love to hear from you.
+            </p>
+          </div>
+
+          {status === "sent" ? (
+            <div className="text-center py-12">
+              <CheckCircle className="h-12 w-12 text-emerald-500 mx-auto mb-4" />
+              <h3 className="font-display font-bold text-xl text-foreground mb-2">
+                Message Sent!
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                Thank you for reaching out. We'll get back to you soon.
+              </p>
+              <Button
+                variant="outline"
+                className="rounded-full"
+                onClick={() => setStatus("idle")}
               >
-                <Instagram className="h-5 w-5" />
-                Message on Instagram
-              </a>
-            </Button>
+                Send Another Message
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  required
+                  maxLength={100}
+                  placeholder="Your name"
+                  className="rounded-xl mt-1.5"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  required
+                  maxLength={255}
+                  placeholder="you@example.com"
+                  className="rounded-xl mt-1.5"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <Label htmlFor="message">Message</Label>
+                <Textarea
+                  id="message"
+                  required
+                  maxLength={1000}
+                  placeholder="How can we help?"
+                  className="rounded-xl mt-1.5 min-h-[120px]"
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                />
+              </div>
+              {status === "error" && (
+                <p className="text-sm text-red-500 text-center">
+                  Something went wrong. Please try again or email us directly.
+                </p>
+              )}
+              <Button
+                type="submit"
+                size="lg"
+                disabled={status === "sending"}
+                className="w-full rounded-full gap-2 shadow-md"
+              >
+                {status === "sending" ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Mail className="h-4 w-4" />
+                    Send Message
+                  </>
+                )}
+              </Button>
+            </form>
+          )}
+
+          <div className="flex flex-col items-center gap-3 mt-8">
+            <p className="text-sm text-muted-foreground">Or reach us directly:</p>
+            <div className="flex gap-3">
+              <Button variant="outline" size="sm" className="rounded-full gap-2" asChild>
+                <a href="mailto:aarini@pawsinaction.org">
+                  <Mail className="h-4 w-4" />
+                  aarini@pawsinaction.org
+                </a>
+              </Button>
+              <Button variant="outline" size="sm" className="rounded-full gap-2" asChild>
+                <a
+                  href="https://www.instagram.com/_pawsinaction_"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Instagram className="h-4 w-4" />
+                  Instagram
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -440,7 +566,7 @@ const Index = () => {
               <Mail className="h-5 w-5" />
             </a>
             <a
-              href="https://www.instagram.com/pawsinaction_2025"
+              href="https://www.instagram.com/_pawsinaction_"
               target="_blank"
               rel="noopener noreferrer"
               className="text-stone-400 hover:text-white transition-colors"
