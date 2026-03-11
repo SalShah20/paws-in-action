@@ -1,88 +1,154 @@
-import { useState } from "react";
-import { Mail, PawPrint, ArrowRight } from "lucide-react";
+import { Mail, PawPrint, ArrowRight, Heart, Instagram, Users, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/logo.jpeg";
 
 const programs = [
   {
     emoji: "👟",
     title: "Shoe Drive Fundraisers",
-    description: "Collect gently used shoes to raise funds for animal shelters and rescue organizations.",
+    description:
+      "Collect gently used shoes to raise funds for animal shelters and rescue organizations.",
+    bg: "bg-stone-50",
+    iconBg: "bg-amber-100",
   },
   {
     emoji: "🧦",
     title: "Pet-Themed Sock Sales",
-    description: "Fun paw-print socks with all proceeds supporting animal welfare programs.",
+    description:
+      "Fun paw-print socks with all proceeds supporting animal welfare programs.",
+    bg: "bg-orange-50/60",
+    iconBg: "bg-orange-100",
   },
   {
     emoji: "🧣",
     title: "Blanket & Supply Drives",
-    description: "Gather blankets, toys, and essentials for shelter animals awaiting their forever homes.",
+    description:
+      "Gather blankets, toys, and essentials for shelter animals awaiting their forever homes.",
+    bg: "bg-stone-50",
+    iconBg: "bg-stone-200",
   },
   {
     emoji: "🦃",
     title: "Thanksgiving Pet Food Drive",
-    description: "Holiday pet food collection ensuring shelter animals and pets in need are fed.",
+    description:
+      "Holiday pet food collection ensuring shelter animals and pets in need are fed.",
+    bg: "bg-amber-50/60",
+    iconBg: "bg-amber-100",
   },
 ];
 
-const Index = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    organization: "",
-    message: "",
-  });
+const navLinks = [
+  { href: "#programs", label: "Programs" },
+  { href: "#partners", label: "Partners" },
+  { href: "#about", label: "About Us" },
+  { href: "#contact", label: "Contact" },
+];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`Contact from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nOrganization: ${formData.organization}\n\n${formData.message}`
-    );
-    window.location.href = `mailto:pawsaction.in@gmail.com?subject=${subject}&body=${body}`;
-    toast({
-      title: "Opening your email client",
-      description: "Your message details have been pre-filled.",
-    });
-    setFormData({ name: "", email: "", organization: "", message: "" });
-  };
+const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Navbar */}
+      <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+        <div className="container mx-auto px-4 flex items-center justify-between h-16">
+          <a href="#" className="flex items-center gap-2">
+            <img src={logo} alt="Paws in Action" className="w-9 h-9 rounded-full" />
+            <span className="font-display font-bold text-lg text-foreground">
+              Paws in Action
+            </span>
+          </a>
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://www.instagram.com/pawsinaction_2025"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+            <Button size="sm" className="rounded-full px-5 gap-1.5" asChild>
+              <a href="#contact">
+                Get Involved
+                <PawPrint className="h-3.5 w-3.5" />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero */}
-      <section className="py-24 md:py-32 border-b border-border">
-        <div className="container mx-auto px-4 flex flex-col items-center text-center">
-          <img
-            src={logo}
-            alt="Paws in Action logo"
-            className="w-48 md:w-64 mb-10"
-          />
-          <h1 className="font-display text-5xl md:text-7xl font-bold text-foreground mb-6 tracking-tight">
+      <section className="relative py-24 md:py-36 bg-hero-gradient overflow-hidden">
+        {/* Floating paw decorations */}
+        <PawPrint className="absolute top-16 left-[10%] h-16 w-16 text-stone-300 paw-float" />
+        <PawPrint className="absolute top-32 right-[15%] h-12 w-12 text-amber-200 paw-float" style={{ animationDelay: "2s" }} />
+        <PawPrint className="absolute bottom-20 left-[20%] h-10 w-10 text-stone-200 paw-float" style={{ animationDelay: "4s" }} />
+        <PawPrint className="absolute bottom-32 right-[25%] h-14 w-14 text-orange-200 paw-float" style={{ animationDelay: "1s" }} />
+
+        <div className="container mx-auto px-4 flex flex-col items-center text-center relative z-10">
+          <div className="mb-8 relative">
+            <img
+              src={logo}
+              alt="Paws in Action logo"
+              className="w-36 md:w-48 rounded-2xl shadow-lg ring-4 ring-stone-200"
+            />
+            <span className="absolute -bottom-2 -right-2 text-3xl">🐾</span>
+          </div>
+          <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 tracking-tight gradient-text">
             Paws in Action
           </h1>
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground leading-relaxed mb-10">
-            Paws in Action is a student-led organization dedicated to improving the lives of animals
-            through fundraising, donation drives, and community events that support shelters and
-            rescue partners.
+            A student-led initiative dedicated to supporting animal shelters and
+            rescue organizations through fundraising, donation drives, and community
+            events across California.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="rounded-none px-8 gap-2" asChild>
+            <Button
+              size="lg"
+              className="rounded-full px-8 gap-2 shadow-md"
+              asChild
+            >
               <a href="#contact">
                 Partner With Us
                 <ArrowRight className="h-4 w-4" />
               </a>
             </Button>
-            <Button size="lg" variant="outline" className="rounded-none px-8 gap-2" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="rounded-full px-8 gap-2 border-2"
+              asChild
+            >
               <a href="#programs">
-                Get Involved
+                Our Programs
                 <PawPrint className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="rounded-full px-8 gap-2 border-2"
+              asChild
+            >
+              <a
+                href="https://www.instagram.com/pawsinaction_2025"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Instagram className="h-4 w-4" />
+                Follow Us
               </a>
             </Button>
           </div>
@@ -90,47 +156,62 @@ const Index = () => {
       </section>
 
       {/* Statistics */}
-      <section className="py-20 bg-foreground text-primary-foreground">
+      <section className="py-20 bg-stone-800 text-white">
         <div className="container mx-auto px-4">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-16">
             Why This Matters in California
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-3xl mx-auto mb-12">
-            <div className="text-center">
+            <div className="text-center bg-white/5 backdrop-blur-sm rounded-2xl p-8">
               <span className="text-5xl mb-4 block">🐶</span>
-              <p className="text-5xl md:text-6xl font-bold font-display mb-3">391,000+</p>
-              <p className="text-primary-foreground/70 text-lg">
+              <p className="text-5xl md:text-6xl font-bold font-display mb-3">
+                391,000+
+              </p>
+              <p className="text-stone-300 text-lg">
                 Animals entered California shelters in 2023.
               </p>
             </div>
-            <div className="text-center">
+            <div className="text-center bg-white/5 backdrop-blur-sm rounded-2xl p-8">
               <span className="text-5xl mb-4 block">🩺</span>
-              <p className="text-5xl md:text-6xl font-bold font-display mb-3">344,000+</p>
-              <p className="text-primary-foreground/70 text-lg">
-                Shelter animals lack adequate access to veterinary care staff in California.
+              <p className="text-5xl md:text-6xl font-bold font-display mb-3">
+                344,000+
+              </p>
+              <p className="text-stone-300 text-lg">
+                Shelter animals lack adequate access to veterinary care staff in
+                California.
               </p>
             </div>
           </div>
-          <p className="text-center text-primary-foreground/60 text-sm max-w-lg mx-auto">
-            These numbers show why student-led support and community partnerships matter.
+          <p className="text-center text-stone-400 text-sm max-w-lg mx-auto">
+            These numbers show why student-led support and community partnerships
+            matter.
           </p>
         </div>
       </section>
 
       {/* Programs */}
-      <section id="programs" className="py-20 bg-background">
+      <section id="programs" className="py-20 bg-warm-gradient">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-center text-foreground mb-16">
-            Our Impact Through Action
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+              What We Do
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2">
+              Our Impact Through Action
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {programs.map((program) => (
               <Card
                 key={program.title}
-                className="border border-border rounded-none shadow-none hover:shadow-md transition-shadow"
+                className={`${program.bg} border border-stone-200 rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}
               >
                 <CardContent className="p-8 text-center">
-                  <span className="text-4xl mb-5 block">{program.emoji}</span>
+                  <div
+                    className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${program.iconBg} mb-5`}
+                  >
+                    <span className="text-3xl">{program.emoji}</span>
+                  </div>
                   <h3 className="font-display font-bold text-lg text-foreground mb-3">
                     {program.title}
                   </h3>
@@ -145,109 +226,218 @@ const Index = () => {
       </section>
 
       {/* Partners */}
-      <section className="py-20 border-t border-b border-border bg-secondary">
+      <section id="partners" className="py-20 bg-background">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-12">
+          <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+            Working Together
+          </span>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-12">
             Our Partners
           </h2>
           <div className="max-w-md mx-auto mb-10">
-            <Card className="border border-border rounded-none shadow-none">
+            <Card className="border border-stone-200 rounded-2xl shadow-sm bg-stone-50/50 hover:shadow-lg transition-shadow">
               <CardContent className="p-8">
-                <PawPrint className="h-8 w-8 text-foreground mx-auto mb-4" />
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-amber-100 mb-4">
+                  <PawPrint className="h-7 w-7 text-amber-700" />
+                </div>
                 <h3 className="font-display font-bold text-xl text-foreground mb-2">
                   House Rabbit Society
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  Dedicated to the rescue and welfare of domestic rabbits through education and advocacy.
+                  Dedicated to the rescue and welfare of domestic rabbits through
+                  education and advocacy.
                 </p>
               </CardContent>
             </Card>
           </div>
           <p className="text-muted-foreground text-sm">
             More partners to be announced.{" "}
-            <a href="#contact" className="underline text-foreground font-medium">
+            <a
+              href="#contact"
+              className="text-foreground font-medium hover:underline"
+            >
               Interested in partnering? Contact us below.
             </a>
           </p>
         </div>
       </section>
 
+      {/* About Us */}
+      <section id="about" className="py-20 bg-warm-gradient">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+              Our Story
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2">
+              About Us
+            </h2>
+          </div>
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Mission */}
+            <Card className="border border-stone-200 rounded-2xl shadow-sm bg-white">
+              <CardContent className="p-8">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 mb-4">
+                  <Heart className="h-6 w-6 text-amber-700" />
+                </div>
+                <h3 className="font-display font-bold text-xl text-foreground mb-3">
+                  Who We Are
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Paws in Action is a student-led initiative dedicated to supporting
+                  animal shelters and rescue organizations through fundraising,
+                  donation drives, and community events.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mt-4">
+                  Our goal is to bring students and communities together to raise
+                  resources, awareness, and support for animals in need. By organizing
+                  simple but impactful initiatives such as supply drives, fundraising
+                  events, and community outreach programs, we aim to provide meaningful
+                  assistance to local shelters and rescues.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Founder */}
+            <Card className="border border-stone-200 rounded-2xl shadow-sm bg-white">
+              <CardContent className="p-8">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-stone-200 mb-4">
+                  <Users className="h-6 w-6 text-stone-600" />
+                </div>
+                <h3 className="font-display font-bold text-xl text-foreground mb-3">
+                  Meet the Founder
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Paws in Action was founded by <span className="font-semibold text-foreground">Aarini Shah</span>,
+                  a student at Milpitas High School, who has a strong interest in
+                  animal welfare and community service.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mt-4">
+                  After learning about the number of animals entering shelters each
+                  year and the challenges shelters face in providing care and
+                  resources, Aarini started Paws in Action to help connect students
+                  with opportunities to support local animal welfare organizations.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Vision */}
+            <Card className="border border-stone-200 rounded-2xl shadow-sm bg-white md:col-span-2">
+              <CardContent className="p-8">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 mb-4">
+                  <Eye className="h-6 w-6 text-orange-700" />
+                </div>
+                <h3 className="font-display font-bold text-xl text-foreground mb-3">
+                  Our Vision
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Our vision is to build long-term partnerships with animal shelters
+                  and rescue organizations while empowering students to make a
+                  meaningful impact through service and community engagement.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6 pt-6 border-t border-stone-100">
+                  <div className="text-center">
+                    <span className="text-3xl mb-2 block">🐾</span>
+                    <h4 className="font-semibold text-foreground mb-1">
+                      Compassion
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      Every animal deserves kindness, care, and a chance at a better
+                      life.
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <span className="text-3xl mb-2 block">🤝</span>
+                    <h4 className="font-semibold text-foreground mb-1">
+                      Community
+                    </h4>
+                    <p className="text-sm text-muted-foreground">
+                      Together, students and partners can create lasting impact for
+                      animals in need.
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <span className="text-3xl mb-2 block">💪</span>
+                    <h4 className="font-semibold text-foreground mb-1">Action</h4>
+                    <p className="text-sm text-muted-foreground">
+                      We turn compassion into tangible results through hands-on
+                      programs and events.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Contact */}
       <section id="contact" className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-xl">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-center text-foreground mb-4">
+        <div className="container mx-auto px-4 max-w-lg text-center">
+          <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+            Reach Out
+          </span>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
             Get in Touch
           </h2>
-          <p className="text-center text-muted-foreground mb-10">
-            Reach out to partner, volunteer, or learn more about Paws in Action.
+          <p className="text-muted-foreground mb-10">
+            Want to partner, volunteer, or learn more? We'd love to hear from you.
           </p>
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                required
-                maxLength={100}
-                className="rounded-none mt-1.5"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              />
-            </div>
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                required
-                maxLength={255}
-                className="rounded-none mt-1.5"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              />
-            </div>
-            <div>
-              <Label htmlFor="organization">Organization</Label>
-              <Input
-                id="organization"
-                maxLength={200}
-                className="rounded-none mt-1.5"
-                value={formData.organization}
-                onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-              />
-            </div>
-            <div>
-              <Label htmlFor="message">Message</Label>
-              <Textarea
-                id="message"
-                required
-                maxLength={1000}
-                className="rounded-none mt-1.5 min-h-[120px]"
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              />
-            </div>
-            <Button type="submit" size="lg" className="w-full rounded-none gap-2">
-              <Mail className="h-4 w-4" />
-              Send Message
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button size="lg" className="rounded-full px-8 gap-2 shadow-md" asChild>
+              <a href="mailto:pawsaction.in@gmail.com">
+                <Mail className="h-5 w-5" />
+                Email Us
+              </a>
             </Button>
-          </form>
-          <p className="text-center text-xs text-muted-foreground mt-6">
-            Or email us directly at{" "}
-            <a href="mailto:pawsaction.in@gmail.com" className="underline text-foreground">
-              pawsaction.in@gmail.com
-            </a>
-          </p>
+            <Button
+              size="lg"
+              variant="outline"
+              className="rounded-full px-8 gap-2 border-2"
+              asChild
+            >
+              <a
+                href="https://www.instagram.com/pawsinaction_2025"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Instagram className="h-5 w-5" />
+                Message on Instagram
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-border bg-background">
-        <div className="container mx-auto px-4 flex flex-col items-center gap-2">
-          <span className="font-display font-semibold text-foreground text-sm">
-            Paws in Action
-          </span>
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Paws in Action. All rights reserved.
+      <footer className="py-10 bg-stone-800 text-white">
+        <div className="container mx-auto px-4 flex flex-col items-center gap-4">
+          <div className="flex items-center gap-2">
+            <PawPrint className="h-5 w-5" />
+            <span className="font-display font-bold text-lg">
+              Paws in Action
+            </span>
+          </div>
+          <div className="flex items-center gap-4">
+            <a
+              href="mailto:pawsaction.in@gmail.com"
+              className="text-stone-400 hover:text-white transition-colors"
+              aria-label="Email"
+            >
+              <Mail className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.instagram.com/pawsinaction_2025"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-stone-400 hover:text-white transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+          </div>
+          <p className="text-sm text-stone-400">
+            &copy; {new Date().getFullYear()} Paws in Action. All rights reserved.
           </p>
         </div>
       </footer>
