@@ -17,10 +17,10 @@ const programs = [
       "Collect gently used shoes to raise funds for animal shelters and rescue organizations.",
   },
   {
-    emoji: "🧦",
-    title: "Pet-Themed Sock Sales",
+    emoji: "🍪",
+    title: "Fundraising Sales",
     description:
-      "Fun paw-print socks with all proceeds supporting animal welfare programs.",
+      "Bake sales, merchandise, and themed items organized to raise funds for animal welfare initiatives.",
   },
   {
     emoji: "🧣",
