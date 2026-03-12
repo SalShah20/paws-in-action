@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import logo from "@/assets/logo.jpeg";
 
-const WEB3FORMS_KEY = "0321222c-dae1-407c-b7da-f70eb9bc2161";
+const WEB3FORMS_KEY = "52beb994-78f2-4d12-a8c7-059e4ed677f0";
 
 const programs = [
   {
